@@ -1,0 +1,8 @@
+Las siguientes son una serie de actividades que habrá que realizar para que el proyecto se encuentre más cerca al nivel de dificultad de los proyectos asignados al resto del grupo.
+
+Modificaciones (para primera entrega):
+1. Agregar una opción al menú Inventario.
+2. Implementar la funcionalidad Inventario -> Alta de libros; agrega nuevo título, no agrega unidades.
+3. Implementar la funcionalidad Inventario -> Arribo de libros al inventario; agrega nuevas unidades al inventario actual.
+4. Implementar la funcionalidad Inventario -> Eliminar libros del inventario; solo será posible eliminar libros no prestados.
+5. Implementar la funcionalidad Inventario -> Baja de libros, solo podrán darse de baja títulos de libros sin préstamos pendientes. Se elimina todo el inventario.
