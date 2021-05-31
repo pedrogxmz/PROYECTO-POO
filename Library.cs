@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Util;
 
 namespace MyLibrary
@@ -94,7 +93,7 @@ namespace MyLibrary
             int NewCopies = CopiasActuales - CopiasNuevas;
             return NewCopies;
         }
-        public void ActualizarCopias(int Libroid, int NewCopies)//6277124
+        public void ActualizarCopias(int Libroid, int NewCopies)
         {
             string titulo = books.Find(b => b.Id == Libroid).Title;
             string autor = books.Find(b => b.Id == Libroid).Author;
@@ -114,24 +113,79 @@ namespace MyLibrary
                                             new[] { "Id", "Copies", "Title", "Author", "EditorialId", "Edition", "Year" },
                                             books);
         }
-        /*public List<LibrosPendientes> LibrosEnPrestamosPorUsuario()
+        public List<User> UsuariosConPrestamo() => new List<User>(this.users);
+        public List<PrestamosPendientes> ObtenerPrestamosPendientes(int userid)
         {
-            var pendings = new List<LibrosPendientes>();
-
-            borrows.FindAll(a => a.UserId == users.id).ForEach(a =>
-                    pendings.Add(new LibrosPendientes(
-                        books.Find(b => b.Id == a.BookId))));
+            var pendings = new List<PrestamosPendientes>(userid);
+            borrows.FindAll(b => b.UserId == userid).ForEach(b =>
+             pendings.Add(new PrestamosPendientes(
+                 users.Find(u => u.Id == b.UserId),
+                 books.Find(l => l.Id == b.BookId)
+                 )));
             return pendings;
         }
-        /*public List<PrestamosPendientes> ObtenerPrestamosPendientes()
+        public bool Disponibilidad(int book_id)
         {
-            var pendings = new List<PrestamosPendientes>();
-            borrows.ForEach(b =>
-            pendings.Add(new PrestamosPendientes(
-                users.Find(u => u.Id == b.UserId),
-                books.Find(l => l.Id == b.BookId)
-                )));
-            return pendings;
-        }*/
+            var mylist = new List<Borrow>();
+            int copias = 0;
+            bool bandera = false;
+
+            mylist = borrows.FindAll(b => b.BookId == book_id);
+            copias = books.Find(p => p.Id == book_id).Copies;
+            if (mylist.ToArray().Length < copias == true)
+            {
+                bandera = true;
+            }
+
+            return bandera;
+        }
+
+        public void AgregarPrestamo(int UserId, int BookId)
+        {
+            borrows.Add(new Borrow(UserId, BookId));
+            EasyFile<Borrow>.SaveDataToFile("borrows.txt",
+                new[] { "UserId", "BookId" },
+                borrows);
+        }
+
+        public List<PrestamosPendientes> PrestamosPorLibro(int bookid)
+        {
+            var pendientes = new List<PrestamosPendientes>();
+            borrows.FindAll(b => b.BookId == bookid).ForEach(b =>
+             pendientes.Add(new PrestamosPendientes(
+                 users.Find(u => u.Id == b.UserId),
+                 books.Find(l => l.Id == b.BookId)
+                 )));
+            return pendientes;
+        }
+
+
+        public string ImprimirLibro(int bookId)
+        {
+            string libro = books.Find(b => b.Id == bookId).Title;
+            return libro;
+        }
+        public int ObtenerContador(int bookId)
+        {
+            var pendientes = new List<PrestamosPendientes>();
+            borrows.FindAll(b => b.BookId == bookId).ForEach(b =>
+             pendientes.Add(new PrestamosPendientes(
+                 users.Find(u => u.Id == b.UserId),
+                 books.Find(l => l.Id == b.BookId)
+                 )));
+            int contador = pendientes.FindAll(b => b.Book.Id == bookId).Count;
+            return contador;
+        }
+        public void DevolverPrestamo(int UserId, int BookId)
+        {
+            borrows.RemoveAll(b => b.BookId == BookId && b.UserId == UserId);
+            EasyFile<Borrow>.SaveDataToFile("borrows.txt",
+                new[] { "UserId", "BookId" },
+                borrows);
+        }
+
+
+
+
     }
 }

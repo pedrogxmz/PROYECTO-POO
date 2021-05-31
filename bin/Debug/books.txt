@@ -15,3 +15,4 @@
 3233255|4|Electronica de potencia|Muhammad Rashid|0|4|2015
 7325639|1|Problemas resueltos de control digital|Jose Gomez Campomanes|4|1|2012
 1509482|2|Fundamentos de circuitos electricos|Charles K. Alexander|1|5|2013
+2727464|5|Programacion en C++|Edson Estrada|1234|1|2019

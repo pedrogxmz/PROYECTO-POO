@@ -40,3 +40,17 @@ D:\Documentos\CUARTO SEMESTRE\MyLibrary\obj\Debug\MyLibrary.csprojAssemblyRefere
 D:\Documentos\CUARTO SEMESTRE\MyLibrary\obj\Debug\MyLibrary.csproj.CoreCompileInputs.cache
 D:\Documentos\CUARTO SEMESTRE\MyLibrary\obj\Debug\MyLibrary.exe
 D:\Documentos\CUARTO SEMESTRE\MyLibrary\obj\Debug\MyLibrary.pdb
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO\bin\Debug\MyLibrary.exe.config
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO\bin\Debug\MyLibrary.exe
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO\bin\Debug\MyLibrary.pdb
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO\obj\Debug\MyLibrary.csprojAssemblyReference.cache
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO\obj\Debug\MyLibrary.csproj.CoreCompileInputs.cache
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO\obj\Debug\MyLibrary.exe
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO\obj\Debug\MyLibrary.pdb
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO (FINAL)\bin\Debug\MyLibrary.exe.config
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO (FINAL)\bin\Debug\MyLibrary.exe
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO (FINAL)\bin\Debug\MyLibrary.pdb
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO (FINAL)\obj\Debug\MyLibrary.csprojAssemblyReference.cache
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO (FINAL)\obj\Debug\MyLibrary.csproj.CoreCompileInputs.cache
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO (FINAL)\obj\Debug\MyLibrary.exe
+D:\Documentos\CUARTO SEMESTRE\PROYECTO POO (FINAL)\obj\Debug\MyLibrary.pdb

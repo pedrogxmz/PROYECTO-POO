@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static System.Console;
 
 namespace MyLibrary
@@ -127,7 +124,7 @@ namespace MyLibrary
             } while (op != 0);
         }
 
-             static void OrdenadosPorNombre()
+        static void OrdenadosPorNombre()
         {
             Clear();
             WriteLine("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
@@ -142,7 +139,7 @@ namespace MyLibrary
             WriteLine();
             ReadKey(true);
         }
-            static void OrdenadosPorApellido()
+        static void OrdenadosPorApellido()
         {
             Clear();
             WriteLine("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
@@ -157,7 +154,7 @@ namespace MyLibrary
             WriteLine();
             ReadKey(true);
         }
-            static void OrdenadosPorId()
+        static void OrdenadosPorId()
         {
             Clear();
             WriteLine("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
@@ -211,11 +208,11 @@ namespace MyLibrary
                     WriteLine($"\nEl usuario con ID {usuarioId} tiene los siguientes libros en prestamo: ");
                     WriteLine();
                     var titulos = library.LibrosEnPrestamosPorUsuario(usuarioId);
-                    for(int i=0; i<titulos.Count; i++)
+                    for (int i = 0; i < titulos.Count; i++)
                     {
                         WriteLine($"{titulos[i].Book.Id} - {titulos[i].Book.Title}");
                     }
-                    ReadKey(true);  
+                    ReadKey(true);
                 }
                 else
                 {
@@ -490,19 +487,87 @@ namespace MyLibrary
             WriteLine("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
             WriteLine("                                        PRÉSTAMOS PENDIENTES                                      ");
             WriteLine("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-            /*library.ObtenerPrestamosPendientes()
-                 .ForEach(b => WriteLine($"{b.user.FirstName} {b.user.LastName} - {b.Book.Title}"));
-            WriteLine();
+            var usuarios = library.UsuariosConPrestamo();
+            for (int i = 0; i < usuarios.Count; i++)
+            {
+                WriteLine($" {usuarios[i].Id} {usuarios[i].FirstName} {usuarios[i].LastName}");
+                WriteLine();
+                library.ObtenerPrestamosPendientes(usuarios[i].Id)
+                    .ForEach(b => WriteLine($"+ {b.Book.Title}"));
+                WriteLine();
+                WriteLine();
+            }
             ReadKey(true);
-        }*/
         }
+
         static void SolicitarPrestamos()
         {
+            Clear();
+            WriteLine("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            WriteLine("                                        SOLICITAR PRÉSTAMO                                        ");
+            WriteLine("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
+            WriteLine("Clave de usuario: ");
+            int UserId = Convert.ToInt32(ReadLine());
+            if (library.ValidarId(UserId))
+            {
+                WriteLine("Ingrese el id del libro a prestar: ");
+                int bookId = Convert.ToInt32(ReadLine());
+                if (library.ValidarIdLibro(bookId) == true)
+                {
+                    if (library.Disponibilidad(bookId) == true)
+                    {
+                        library.AgregarPrestamo(UserId, bookId);
+                        WriteLine("El prestamo se ha añadido con éxito");
+                    }
+                    else
+                    {
+                        WriteLine("El libro solicitado no está disponible para préstamo");
+                    }
+                }
+                else
+                {
+                    WriteLine("El libro ingresado no existe");
+                }
+            }
+            else
+            {
+                WriteLine("El usuario no existe");
+            }
+            WriteLine();
+            ReadKey();
         }
         static void DevolverPrestamos()
         {
 
+            Clear();
+            WriteLine("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            WriteLine("                                       DEVOLVER PRÉSTAMO                                          ");
+            WriteLine("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            WriteLine("Ingrese el id del libro a devolver: ");
+            int bookId = Convert.ToInt32(ReadLine());
+            if (library.ValidarPrestamosLibros(bookId))
+            {
+                List<PrestamosPendientes> pendientes = library.PrestamosPorLibro(bookId);
+                string libro = library.ImprimirLibro(bookId);
+                WriteLine($"{ libro}");
+                int contador = library.ObtenerContador(bookId);
+                for (int i = 0; i < contador; i++)
+                {
+                    WriteLine($"{i} {pendientes[i].User.FirstName} {pendientes[i].User.LastName}");
+                }
+                WriteLine("Ingrese el numero de usuario que devolverá el libro: ");
+                int opcion = Convert.ToInt32(ReadLine());
+                library.DevolverPrestamo(pendientes[opcion].User.Id, bookId);
+                WriteLine("El libro ha sido devuelto con éxito");
+                WriteLine();
+                ReadKey(true);
+            }
+            else
+            {
+                WriteLine("El libro ingresado no existe o no tiene préstamos realizados");
+                ReadKey(true);
+            }
         }
     }
 
